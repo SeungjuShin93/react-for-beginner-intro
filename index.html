@@ -19,6 +19,7 @@
       reset();
       setFlipped(current => !current);
     }
+    const setEmpty = () => amount === 0 ? setAmount("") : null
     return (
       <div>
         <h1 className="hi">Super Converter</h1>
@@ -31,6 +32,7 @@
             type="number"
             onChange={onChange}
             disabled={flipped}
+            onClick={setEmpty}
           />
         </div>
         <div>
@@ -42,6 +44,7 @@
             type="number"
             disabled={!flipped}
             onChange={onChange}
+            onClick={setEmpty}
           />
         </div>
         <button onClick={reset}>Reset</button>
