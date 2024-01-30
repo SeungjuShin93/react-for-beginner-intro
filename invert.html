@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+  const root = document.getElementById('root');
+  function App() {
+    const [minutes, setMinutes] = React.useState("");
+    const [inverted, setInverted] = React.useState(true);
+    const onChange = (event) => setMinutes(event.target.value);
+    const onReset = () => setMinutes("");
+    const onInvert = () => {
+      setInverted(current => !current);
+      onReset();
+    };
+    return (
+      <div>
+        <h1 className="hi">Super Converter</h1>
+        <div>
+          <label htmlFor="minutes">Minutes</label>
+          <input
+            id="minutes"
+            placeholder="Minutes"
+            type="number"
+            value=
+            {
+              inverted ? minutes : (minutes * 60)
+            }
+            onChange={onChange}
+            disabled={!inverted} />
+        </div>
+        <div>
+          <label htmlFor="hours">Hours</label>
+          <input
+            id="hours"
+            placeholder="Hours"
+            type="number"
+            value=
+            {
+              inverted ? Math.round(minutes / 60) : minutes
+            }
+            onChange={onChange}
+            disabled={inverted} />
+        </div>
+        <button onClick={onReset}>Reset</button>
+        <button onClick={onInvert}>{inverted ? 'Invert' : "Turn Back"}</button>
+      </div>
+    )
+  }
+  ReactDOM.render(<App />, root);
+</script>
+
+</html>
